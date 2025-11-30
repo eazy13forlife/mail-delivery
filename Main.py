@@ -15,7 +15,14 @@ with open("CSV/Addresses.csv") as csvfile:
     csv_addresses = csv.reader(csvfile)
     addresses_list = list(csv_addresses)
 
-# load each package into hash table
+def find_distance(address_one,address_two)
+    distance=distances_list[address_one][address_two]
+    if distance=="":
+        distance=distances_list[address_two][address_one]
+
+    return float(distance)
+
+# load each package into hashmap
 package_hash_map= HashMap();
 
 for packageItem in packages_list:
