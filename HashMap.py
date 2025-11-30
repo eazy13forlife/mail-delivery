@@ -1,0 +1,52 @@
+class HashMap:
+    def __init__(self,size=2):
+       self.list=[]
+
+       for i in range(size):
+           self.list.append([])
+
+    def get_value(self,key):
+        bucket_index=hash(key)%len(self.list)
+
+        bucket_list=self.list[bucket_index]
+
+        # if key exists, just update key
+        for list_item in bucket_list:
+            if list_item[0] == key:
+                return list_item[1]
+
+        return None
+
+    def insert(self,key,item):
+        bucket_index=hash(key)%len(self.list)
+
+        bucket_list=self.list[bucket_index]
+
+        # if key exists, just update key
+        for list_item in bucket_list:
+            if list_item[0] == key:
+                list_item[1]=item
+                return True
+
+        #Otherwise just append this key,item to end of our bucket
+        bucket_list.append([key,item])
+
+        return True;
+
+    def remove(self,key):
+        bucket_index=hash(key)%len(self.list);
+
+        bucket_list=self.list[bucket_index]
+
+        value=self.get_value(key)
+
+        if value is not None:
+                 bucket_list.remove([key,value])
+                 return True
+
+        return False;
+
+
+
+
+
