@@ -1,14 +1,10 @@
-from HashMap import HashMap
+import csv
 
-map1=HashMap();
-
-
-map1.insert("dog","cat");
-
-map1.insert("floozie","cat");
+with open("CSV/Distances.csv") as csvfile:
+    CSV_Distance = csv.reader(csvfile)
+    CSV_Distance = list(CSV_Distance)
 
 
 
 
-
-print(map1.list);
+print(CSV_Distance);

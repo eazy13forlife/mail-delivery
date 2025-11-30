@@ -47,6 +47,7 @@ class HashMap:
                  bucket_list.remove([key,value])
                  return True
 
+        # if key doesn't exist, return false
         return False;
 
 
