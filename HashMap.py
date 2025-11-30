@@ -5,19 +5,22 @@ class HashMap:
        for i in range(size):
            self.list.append([])
 
+# takes in a key and returns the value
     def get_value(self,key):
+
         bucket_index=hash(key)%len(self.list)
 
         bucket_list=self.list[bucket_index]
 
-        # if key exists, just update key
+        # if key exists, just return the value
         for list_item in bucket_list:
             if list_item[0] == key:
                 return list_item[1]
 
+        # if no key exists, return None
         return None
 
-    def insert(self,key,item):
+    def insert(self,key,value):
         bucket_index=hash(key)%len(self.list)
 
         bucket_list=self.list[bucket_index]
@@ -25,11 +28,11 @@ class HashMap:
         # if key exists, just update key
         for list_item in bucket_list:
             if list_item[0] == key:
-                list_item[1]=item
+                list_item[1]=value
                 return True
 
         #Otherwise just append this key,item to end of our bucket
-        bucket_list.append([key,item])
+        bucket_list.append([key,value])
 
         return True;
 
