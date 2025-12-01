@@ -11,6 +11,15 @@ class Package:
         self.depart_time=None;
         self.delivery_time=None;
 
+    def update_status(self,at_time):
+        if at_time>=self.delivery_time:
+            self.status = "Delivered"
+        elif at_time>=self.depart_time:
+            self.status = "En Route"
+        else:
+            self.status = "At Hub"
+
+
     def __str__(self):
 
         return ("Id:%s, Address: %s, City: %s, State: %s, Zip Code: %s, Weight: "

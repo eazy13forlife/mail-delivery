@@ -1,3 +1,5 @@
+# student Id:012376846
+
 import csv
 import datetime
 import math
@@ -41,6 +43,12 @@ def get_address_index(address):
             return address_list[0]
 
     return None
+
+# converts a string time inut into datetime object
+def convert_time(user_time):
+    (h, m, s) = user_time.split(":")
+
+    return datetime.timedelta(hours=int(h), minutes=int(m), seconds=int(s))
 
 # create a hash map for packages
 package_hash_map= HashMap()
@@ -122,22 +130,56 @@ def deliver_pacakge(truck):
         # remove the package from undelivered since truck has "delivered" it
         undelivered.remove(next_package)
 
-
-# early morning deadline
+# Load each truck with packages, making sure to adjust for package constraints
 truck1=Truck(16,0,[1,13,14,15, 16,19,20,29,30,31,34,37,40],"4001 South 700 East",0,datetime.timedelta(hours=8))
 
-# eod mostly
-truck3=Truck(16,0,[ 2, 4, 5, 7, 8,9, 10, 11, 12, 17, 21, 22, 23, 24, 26, 33],"4001 South 700 East",0,datetime.timedelta(hours=10,minutes=20))
-
-#only on truck 2 or eod
 truck2=Truck(16,0,[3,6, 18, 25,28,32,36,38,27,35,39],"4001 South 700 East",0,datetime.timedelta(hours=9,minutes=5))
 
+truck3=Truck(16,0,[ 2, 4, 5, 7, 8,9, 10, 11, 12, 17, 21, 22, 23, 24, 26, 33],"4001 South 700 East",0,datetime.timedelta(hours=10,minutes=20))
 
 deliver_pacakge(truck1)
-deliver_pacakge(truck3)
 deliver_pacakge(truck2)
-print(package_hash_map.get_value(9))
-print(truck1.depart_time,truck1.time,truck1.total_miles)
+deliver_pacakge(truck3)
+
+# package=package_hash_map.get_value(6);
+# print(package.update_status(datetime.timedelta(hours=10,minutes=20)));
+
+class Main:
+    print("Western Governors University Parcel Service Program\n")
+
+    total_miles_trucks=truck1.total_miles+truck2.total_miles+truck3.total_miles
+
+    rounded_total_miles=round(total_miles_trucks,0)
+
+    print("Total miles traveled by all trucks: %s miles" % rounded_total_miles)
+
+    run=True
+
+    while run:
+        print("Press 1 to get details of a package at a specific time")
+        print("Press 2 to get details of all packages at a specific time")
+        print("Press 0 to quit the program")
+
+        try:
+            user_option = input()
+            if user_option == "1":
+                try:
+                    specific_time_string=input("Enter the time in HH:MM:SS format: ")
+
+                    converted_time_object=convert_time(specific_time_string)
+
+                    package_id=int(input("Enter the package Id: "))
+
+                    package=package_hash_map.get_value(package_id)
+
+                    package.update_status(converted_time_object)
+
+                    print(package)
+                except:
+                    print("Invalid input,try again")
+        except:
+            print("Please enter a valid input")
+
 
 
 
