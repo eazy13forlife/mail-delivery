@@ -1,4 +1,5 @@
 import csv
+import datetime
 import math
 
 from Package import Package
@@ -80,7 +81,8 @@ def deliver_pacakge(truck):
 
         next_package=None;
 
-        # keep delivering the packages that will require the shortest distance first
+        # find the package that will require the shortest distance from where our truck
+        # currently is
         for package in undelivered:
             if find_distance(get_address_index(package.address),get_address_index(
                     truck.address))<=next_shortest_distance:
@@ -89,6 +91,32 @@ def deliver_pacakge(truck):
                                                      get_address_index(truck.address))
 
                 next_package=package
+        # add the package to the truck packages, this is the next pacakge it will deliver
+        truck.packages.append(next_package.id);
+
+        # when did pacakge depart? same as the truck departure time
+        next_package.departure_time=truck.departure_time
+
+        # total miles truck has gone since delivering this pacakge
+        truck.total_miles+=next_shortest_distance;
+
+        # the new address of our truck since it is now at the address of where package was
+        # delivered
+        truck.address=next_package.address;
+
+        # update the time after the truck delivers the package
+        truck.time+=datetime.timedelta(hours=next_shortest_distance/18)
+
+        # the package that is delivered has the delivery time of when truck delivered the
+        # package
+        next_package.delivery_time=truck.time;
+
+        # the new departure time of the truck is the current time after truck has delivered
+        # the package
+        truck.depart_time=truck.time
+
+        # remove the package from undelivered since truck has "delivered" it
+        undelivered.remove(next_package);
 
 
 
