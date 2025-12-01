@@ -136,7 +136,7 @@ truck2=Truck(16,0,[3,6, 18, 25,28,32,36,38,27,35,39],"4001 South 700 East",0,dat
 deliver_pacakge(truck1)
 deliver_pacakge(truck3)
 deliver_pacakge(truck2)
-print(package_hash_map.get_value(25))
+print(package_hash_map.get_value(9))
 print(truck1.depart_time,truck1.time,truck1.total_miles)
 
 
