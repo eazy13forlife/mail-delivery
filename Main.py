@@ -1,13 +1,13 @@
 # student Id:012376846
 
 import csv
-import datetime
+# import datetime
 import math
 
 from Package import Package
 from HashMap import HashMap
 from Truck import Truck
-
+from datetime import datetime, timedelta
 # read all the csv files and creates lists from them
 with open("CSV/Distances.csv") as csvfile:
     csv_distances = csv.reader(csvfile)
@@ -44,11 +44,11 @@ def get_address_index(address):
 
     return None
 
-# converts a string time inut into datetime object
+# converts a string time input into datetime object
 def convert_time(user_time):
-    (h, m, s) = user_time.split(":")
 
-    return datetime.timedelta(hours=int(h), minutes=int(m), seconds=int(s))
+    return datetime.strptime(user_time, "%I:%M:%S %p")
+
 
 # create a hash map for packages
 package_hash_map= HashMap()
@@ -119,7 +119,7 @@ def deliver_package(truck):
 
         # update the time after the truck delivers the package which is current time plus
         # time it takes to deliver the package so += m/mph
-        truck.time+=datetime.timedelta(hours=next_shortest_distance/18)
+        truck.time+=timedelta(hours=next_shortest_distance/18)
 
         # the package that is delivered has the delivery time of when truck delivered the
         # package
@@ -131,11 +131,13 @@ def deliver_package(truck):
         undelivered.remove(next_package)
 
 # Load each truck with packages, making sure to adjust for package constraints
-truck1=Truck(16,0,[1,13,14,15, 16,19,20,29,30,31,34,37,40],"4001 South 700 East",0,datetime.timedelta(hours=8))
 
-truck2=Truck(16,0,[3,6, 18, 25,28,32,36,38,27,35,39],"4001 South 700 East",0,datetime.timedelta(hours=9,minutes=5))
+truck1=Truck(16,0,[1,13,14,15, 16,19,20,29,30,31,34,37,40],"4001 South 700 East",0,datetime.strptime("08:00:00 AM","%I:%M:%S %p"))
 
-truck3=Truck(16,0,[ 2, 4, 5, 7, 8,9, 10, 11, 12, 17, 21, 22, 23, 24, 26, 33],"4001 South 700 East",0,datetime.timedelta(hours=10,minutes=20))
+truck2=Truck(16,0,[3,6, 18, 25,28,32,36,38,27,35,39],"4001 South 700 East",0,
+             datetime.strptime("09:05:00 AM","%I:%M:%S %p"))
+
+truck3=Truck(16,0,[ 2, 4, 5, 7, 8,9, 10, 11, 12, 17, 21, 22, 23, 24, 26, 33],"4001 South 700 East",0,datetime.strptime("10:20:00 AM","%I:%M:%S %p"))
 
 deliver_package(truck1)
 deliver_package(truck2)
@@ -163,7 +165,7 @@ class Main:
 
             if user_option == "1":
                 try:
-                    specific_time_string=input("Enter the time in HH:MM:SS format: ")
+                    specific_time_string=input("Enter the time in HH:MM:SS AM/PM format: ")
 
                     converted_time_object=convert_time(specific_time_string)
 
@@ -179,7 +181,7 @@ class Main:
 
             elif user_option == "2":
                 try:
-                    specific_time_string = input("Enter the time in HH:MM:SS format: ")
+                    specific_time_string = input("Enter the time in HH:MM:SS AM/PM format: ")
 
                     converted_time_object = convert_time(specific_time_string)
 

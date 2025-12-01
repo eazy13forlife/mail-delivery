@@ -8,11 +8,13 @@ class Truck:
         self.depart_time=depart_time
         self.time=depart_time
 
-
+    # must use strftime("%I:%M:%S %p") after datetime object to get the correct string version
+    # where the hour will be displayed in a 12 hour formart and the correct AM/PM will be
+    # appended
     def __str__(self):
         return ("Max Capacity: %s,Current Capacity: %s, Packages: %s, Address: %s, "
                 "Total Miles: %s,"
                 " Depart Time: %s,"
                 "Time: %s") % (self.max_capacity,self.current_capacity,
                                                self.packages, self.address,
-                                           self.total_miles,self.depart_time,self.time);
+                                           self.total_miles,self.depart_time.strftime("%I:%M:%S %p"),self.time.strftime("%I:%M:%S %p"));

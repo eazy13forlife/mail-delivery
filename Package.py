@@ -19,7 +19,9 @@ class Package:
         else:
             self.status = "At Hub"
 
-
+    # must use strftime("%I:%M:%S %p") after datetime object to get the correct string version
+    # where the hour will be displayed in a 12 hour formart and the correct AM/PM will be
+    # appended
     def __str__(self):
         if self.status=="Delivered":
             return ("Id:%s, Address: %s, City: %s, State: %s, Zip Code: %s, Weight: "
@@ -30,7 +32,8 @@ class Package:
                                                            self.state, self.zip_code,
                                                            self.weight, self.delivery_deadline,
                                                             self.status,
-                                                             self.depart_time,self.delivery_time)
+                                                             self.depart_time.strftime("%I:%M:%S %p"),
+                self.delivery_time.strftime("%I:%M:%S %p"))
         elif self.status=="En Route" or self.status== "At Hub":
             return ("Id:%s, Address: %s, City: %s, State: %s, Zip Code: %s, Weight: "
                     "%s, "
@@ -40,7 +43,7 @@ class Package:
                 self.state, self.zip_code,
                 self.weight, self.delivery_deadline,
                 self.status,
-                self.depart_time)
+                self.depart_time.strftime("%I:%M:%S %p"))
         return None
 
 
