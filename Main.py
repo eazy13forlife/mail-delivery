@@ -74,7 +74,7 @@ def load_packages():
 load_packages()
 
 # method for delivering a  package
-def deliver_pacakge(truck):
+def deliver_package(truck):
 
     # initially, no packages have been delivered, so place them in undelivered list
     undelivered=[]
@@ -137,9 +137,9 @@ truck2=Truck(16,0,[3,6, 18, 25,28,32,36,38,27,35,39],"4001 South 700 East",0,dat
 
 truck3=Truck(16,0,[ 2, 4, 5, 7, 8,9, 10, 11, 12, 17, 21, 22, 23, 24, 26, 33],"4001 South 700 East",0,datetime.timedelta(hours=10,minutes=20))
 
-deliver_pacakge(truck1)
-deliver_pacakge(truck2)
-deliver_pacakge(truck3)
+deliver_package(truck1)
+deliver_package(truck2)
+deliver_package(truck3)
 
 
 class Main:

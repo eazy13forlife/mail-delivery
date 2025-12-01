@@ -41,6 +41,7 @@ class Package:
                 self.weight, self.delivery_deadline,
                 self.status,
                 self.depart_time)
+        return None
 
 
 

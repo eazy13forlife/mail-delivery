@@ -1,5 +1,5 @@
 class HashMap:
-    def __init__(self,size=2):
+    def __init__(self,size=53):
        self.list=[]
 
        for i in range(size):
