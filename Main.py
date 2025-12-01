@@ -142,14 +142,6 @@ deliver_pacakge(truck2)
 deliver_pacakge(truck3)
 
 
-
-# package=package_hash_map.get_value(6);
-# print(package.update_status(datetime.timedelta(hours=10,minutes=20)));
-
-
-
-
-
 class Main:
     print("Western Governors University Parcel Service Program\n")
 
@@ -168,6 +160,7 @@ class Main:
 
         try:
             user_option = input()
+
             if user_option == "1":
                 try:
                     specific_time_string=input("Enter the time in HH:MM:SS format: ")
@@ -200,6 +193,8 @@ class Main:
                     print("Invalid input,try again")
 
             elif user_option == "0":
+                print("Goodbye!")
+
                 run=False
 
         except:
