@@ -20,6 +20,15 @@ class HashMap:
         # if no key exists, return None
         return None
 
+    def get_all_values(self):
+        all_values=[]
+
+        for bucket_list in self.list:
+            for list_item in bucket_list:
+                all_values.append(list_item[1])
+
+        return all_values
+
     def insert(self,key,value):
         bucket_index=hash(key)%len(self.list)
 

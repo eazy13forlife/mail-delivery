@@ -21,13 +21,26 @@ class Package:
 
 
     def __str__(self):
+        if self.status=="Delivered":
+            return ("Id:%s, Address: %s, City: %s, State: %s, Zip Code: %s, Weight: "
+                    "%s, "
+                    "Delivery Deadline: %s, Status: %s, Depart Time: %s, Delivery Time: %s") % (
+                self.id,
+                                                                             self.address, self.city,
+                                                           self.state, self.zip_code,
+                                                           self.weight, self.delivery_deadline,
+                                                            self.status,
+                                                             self.depart_time,self.delivery_time)
+        elif self.status=="En Route" or self.status== "At Hub":
+            return ("Id:%s, Address: %s, City: %s, State: %s, Zip Code: %s, Weight: "
+                    "%s, "
+                    "Delivery Deadline: %s, Status: %s, Depart Time: %s") % (
+                self.id,
+                self.address, self.city,
+                self.state, self.zip_code,
+                self.weight, self.delivery_deadline,
+                self.status,
+                self.depart_time)
 
-        return ("Id:%s, Address: %s, City: %s, State: %s, Zip Code: %s, Weight: "
-                "%s, "
-                "Delivery Deadline: %s, Status: %s, Depart Time: %s, Delivery Time: %s") % (
-            self.id,
-                                                                         self.address, self.city,
-                                                       self.state, self.zip_code,
-                                                       self.weight, self.delivery_deadline,
-                                                        self.status,
-                                                         self.depart_time,self.delivery_time)
+
+
