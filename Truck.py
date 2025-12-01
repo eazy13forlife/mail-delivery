@@ -10,6 +10,9 @@ class Truck:
 
 
     def __str__(self):
-        return "%s, %s, %s, %s, %s,%s,%s" % (self.max_capacity,self.current_capacity,
+        return ("Max Capacity: %s,Current Capacity: %s, Packages: %s, Address: %s, "
+                "Total Miles: %s,"
+                " Depart Time: %s,"
+                "Time: %s") % (self.max_capacity,self.current_capacity,
                                                self.packages, self.address,
                                            self.total_miles,self.depart_time,self.time);
