@@ -1,13 +1,12 @@
 # student Id:012376846
-
 import csv
-# import datetime
 import math
 
 from Package import Package
 from HashMap import HashMap
 from Truck import Truck
 from datetime import datetime, timedelta
+
 # read all the csv files and creates lists from them
 with open("CSV/Distances.csv") as csvfile:
     csv_distances = csv.reader(csvfile)
@@ -135,7 +134,6 @@ def deliver_package(truck):
         undelivered.remove(next_package)
 
 # Load each truck with packages, making sure to adjust for package constraints
-
 truck1=Truck(16,0,[1,13,14,15, 16,19,20,29,30,31,34,37,40],"4001 South 700 East",0,datetime.strptime("08:00:00 AM","%I:%M:%S %p"))
 
 truck2=Truck(16,0,[3,6, 18, 25,28,32,36,38,27,35,39],"4001 South 700 East",0,
@@ -143,10 +141,10 @@ truck2=Truck(16,0,[3,6, 18, 25,28,32,36,38,27,35,39],"4001 South 700 East",0,
 
 truck3=Truck(16,0,[ 2, 4, 5, 7, 8,9, 10, 11, 12, 17, 21, 22, 23, 24, 26, 33],"4001 South 700 East",0,datetime.strptime("10:20:00 AM","%I:%M:%S %p"))
 
+# deliver the packages on each truck
 deliver_package(truck1)
 deliver_package(truck2)
 deliver_package(truck3)
-
 
 class Main:
     print("Western Governors University Parcel Service Program\n")
