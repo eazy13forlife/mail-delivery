@@ -49,8 +49,7 @@ def convert_time(user_time):
 
     return datetime.strptime(user_time, "%I:%M:%S %p")
 
-
-# create a hash map for packages
+# creates a hash map for packages
 package_hash_map= HashMap()
 
 # method for loading each package into hashmap
@@ -70,13 +69,14 @@ def load_packages():
 
         package_hash_map.insert(package_id,package)
 
-# loads each package
+# load each package
 load_packages()
 
-# method for delivering a  package
+# method for delivering a  package. Uses the nearest neighbor algorithm
 def deliver_package(truck):
 
-    # initially, no packages have been delivered, so place them in undelivered list
+    # initially, no packages in the truck have been delivered, so place them in undelivered
+    # list
     undelivered=[]
 
     for package_id in truck.packages:
@@ -84,17 +84,18 @@ def deliver_package(truck):
 
         undelivered.append(package)
 
-    # clear packages from truck, so we can reconstruct based on package with the shortest
-    # distance first
+    # clear all packages from truck, so we can reconstruct in the correct package order we
+    # want, based on package with the shortest distance first and so on.
     truck.packages.clear();
 
+# while there are still packages left to be delivered, we will deliver in the following order:
     while len(undelivered)>0:
         next_shortest_distance=math.inf;
 
         next_package=None;
 
-        # find the package that will require the shortest distance from where our truck
-        # currently is
+        # find the package that will require the shortest distance to deliver from where the
+        # truck currently is
         for package in undelivered:
             if find_distance(get_address_index(package.address),get_address_index(
                     truck.address))<=next_shortest_distance:
@@ -103,25 +104,28 @@ def deliver_package(truck):
                                                      get_address_index(truck.address))
 
                 next_package=package
-        # add the package to the truck packages, this is the next pacakge it will deliver
+
+        # add the package to the truck's packages list, this is the next package the truck
+        # will  deliver
         truck.packages.append(next_package.id);
 
-        # when did pacakge depart? same as the truck's initial departure time when leaving hub
+        # when did this pacakge depart? It has the same departure time as the truck's initial
+        # departure time when leaving the hub
         next_package.depart_time=truck.depart_time
 
-        # total miles truck has gone since delivering this pacakge is current total miles +
-        # distance of package
+        # total miles truck has gone since delivering this package is current total miles +
+        # distance to deliver the package
         truck.total_miles+=next_shortest_distance;
 
         # the new address of our truck is now at the address of where package was
         # delivered
         truck.address=next_package.address;
 
-        # update the time after the truck delivers the package which is current time plus
-        # time it takes to deliver the package so += m/mph
+        # After the truck delivers the package, we need to update the time, which is current
+        # time plus time it takes to deliver the package so += m/mph
         truck.time+=timedelta(hours=next_shortest_distance/18)
 
-        # the package that is delivered has the delivery time of when truck delivered the
+        # the package that is delivered has the delivery time of when the truck delivered the
         # package
         next_package.delivery_time=truck.time;
 
