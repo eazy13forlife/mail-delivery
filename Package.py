@@ -1,3 +1,5 @@
+from datetime import datetime
+
 class Package:
     def __init__(self,id,address,city,state,zip_code,delivery_deadline,weight,status):
         self.id = id
@@ -12,6 +14,12 @@ class Package:
         self.delivery_time=None;
 
     def update_status(self,at_time):
+        if self.id == 9:
+            if at_time < datetime.strptime("10:20:00 ""AM", "%I:%M:%S %p"):
+                self.address = "300 State St"
+            else:
+                self.address = "410 S. State St"
+
         if at_time>=self.delivery_time:
             self.status = "Delivered"
         elif at_time>=self.depart_time:

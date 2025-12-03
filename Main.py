@@ -21,7 +21,8 @@ with open("CSV/Addresses.csv") as csvfile:
     csv_addresses = csv.reader(csvfile)
     addresses_list = list(csv_addresses)
 
-# finds distance between two addresses, using the address_index
+# finds distance between two addresses, using the address_index so we can incorporate
+# distances.csv
 def find_distance(address_one_index,address_two_index):
 
     address_one_index = int(address_one_index)
@@ -35,7 +36,8 @@ def find_distance(address_one_index,address_two_index):
 
     return float(distance)
 
-# gets the index of an address from the address itself, so can be used in find_distance method
+# gets the index of an address from the address itself, so can subsequently be used in
+# find_distance method
 def get_address_index(address):
     for address_list in addresses_list:
         if address_list[2] == address:
@@ -48,7 +50,7 @@ def convert_time(user_time):
 
     return datetime.strptime(user_time, "%I:%M:%S %p")
 
-# creates a hash map for packages
+# create a hash map for packages
 package_hash_map= HashMap()
 
 # method for loading each package into hashmap
