@@ -22,7 +22,7 @@ with open("CSV/Addresses.csv") as csvfile:
     addresses_list = list(csv_addresses)
 
 # finds distance between two addresses, using the address_index so we can incorporate
-# distances.csv
+# the distances.csv file
 def find_distance(address_one_index,address_two_index):
 
     address_one_index = int(address_one_index)
@@ -45,7 +45,7 @@ def get_address_index(address):
 
     return None
 
-# converts a string time input into datetime object
+# converts a string time input in HH:MM:SS AM/PM format into datetime object
 def convert_time(user_time):
 
     return datetime.strptime(user_time, "%I:%M:%S %p")
