@@ -61,12 +61,14 @@ def load_packages():
         package_city=packageItem[2]
         package_state=packageItem[3]
         package_zip_code=packageItem[4]
+        package_truck_number=None
         package_delivery_deadline=packageItem[5]
         package_weight=packageItem[6]
         package_status="At hub"
 
         package=Package(package_id,package_address,package_city,package_state,package_zip_code,
-                        package_delivery_deadline,package_weight,package_status)
+                        package_truck_number,package_delivery_deadline,package_weight,
+                        package_status)
 
         package_hash_map.insert(package_id,package)
 
@@ -82,6 +84,8 @@ def deliver_package(truck):
 
     for package_id in truck.packages:
         package=package_hash_map.get_value(package_id)
+
+        package.truck_number=int(truck.truck_number[0])
 
         undelivered.append(package)
 
@@ -136,13 +140,15 @@ def deliver_package(truck):
         undelivered.remove(next_package)
 
 # Load each truck with packages, making sure to adjust for package constraints
-truck1=Truck(16,0,[1,13,14,15, 16,19,20,29,30,31,34,37,40],"4001 South 700 East",0,datetime.strptime("08:00:00 AM","%I:%M:%S %p"))
+truck1=Truck(1,16,0,[1,13,14,15, 16,19,20,29,30,31,34,37,40],"4001 South 700 East",0,
+             datetime.strptime("08:00:00 AM","%I:%M:%S %p"))
 
-truck2=Truck(16,0,[3,6, 18, 25,28,32,36,38,27,35,39],"4001 South 700 East",0,
+truck2=Truck(2,16,0,[3,6, 18, 25,28,32,36,38,27,35,39],"4001 South 700 East",0,
              datetime.strptime("09:05:00 AM","%I:%M:%S %p"))
 
-truck3=Truck(16,0,[ 2, 4, 5, 7, 8,9, 10, 11, 12, 17, 21, 22, 23, 24, 26, 33],"4001 South 700 East",0,datetime.strptime("10:20:00 AM","%I:%M:%S %p"))
-
+truck3=Truck(3,16,0,[ 2, 4, 5, 7, 8,9, 10, 11, 12, 17, 21, 22, 23, 24, 26, 33],
+                 "4001 South "
+                                                                              "700 East",0,datetime.strptime("10:20:00 AM","%I:%M:%S %p"))
 # deliver the packages on each truck
 deliver_package(truck1)
 deliver_package(truck2)
